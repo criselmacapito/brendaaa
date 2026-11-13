@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 cosas que me gustan de ti</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #fdeef3;
+      font-family: Georgia, serif;
+      color: #6b2a45;
+      text-align: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    /* La tarjeta */
+    #tarjeta {
+      width: 270px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      background: white;
+      border-radius: 22px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+    }
+
+    #numero {
+      font-size: 60px;
+      color: #ff8fb8;
+    }
+
+    #texto {
+      font-size: 21px;
+      line-height: 1.4;
+    }
+
+    /* Animación cada vez que cambia la tarjeta */
+    .entrar {
+      animation: entrar 0.4s;
+    }
+
+    @keyframes entrar {
+      from { opacity: 0; transform: translateX(40px) rotate(4deg); }
+      to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+    }
+
+    #progreso {
+      margin-top: 20px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>10 cosas que me gustan de mi brenchi</h1>
+
+  <div id="tarjeta" onclick="siguiente()">
+    <div id="numero">💝</div>
+    <div id="texto">Toca para empezar WIII, preparate</div>
+  </div>
+
+  <p id="progreso"></p>
+
+  <script>
+    // ---------- 1. LAS 10 COSAS (escribe las tuyas) ----------
+    const cosas = [
+      "Tu carita pechocha, bella hermosa jaja, teamo.",
+      "Tu risa me fascinaencanta a la vez.",
+      "Que me digas las cosas claras.",
+      "Poder hablar contigo de todo.",
+      "Que eres enojona, pero tierna.",
+      "Cómo te emocionas con cosas que te hago.",
+      "Tus llamadas o mensajes en la mñn.",
+      "Que seas como tu eres en realidad conmigo.",
+      "Me motivas todos los dias a hacer mas.",
+      "Que seas tu. Así de simple, T E A M O  BESHITOOOO."
+    ];
+
+    let posicion = -1;   // -1 = todavía no empieza
+
+
+    // ---------- 2. PASAR A LA SIGUIENTE TARJETA ----------
+    function siguiente() {
+      posicion = posicion + 1;
+
+      const tarjeta = document.getElementById("tarjeta");
+
+      // Si ya pasó las 10, mostramos el final
+      if (posicion >= cosas.length) {
+        document.getElementById("numero").textContent = "💗";
+        document.getElementById("texto").textContent =
+          "Y podría seguir, pero no me se lagearia te amoo.";
+        document.getElementById("progreso").textContent = "";
+        tarjeta.onclick = null;   // ya no se puede seguir tocando
+      } else {
+        document.getElementById("numero").textContent = posicion + 1;
+        document.getElementById("texto").textContent = cosas[posicion];
+        document.getElementById("progreso").textContent =
+          (posicion + 1) + " de " + cosas.length;
+      }
+
+      // Repetir la animación: quitar la clase y volver a ponerla
+      tarjeta.classList.remove("entrar");
+      void tarjeta.offsetWidth;          // truco para que el navegador "reinicie" la animación
+      tarjeta.classList.add("entrar");
+    }
+  </script>
+
+</body>
+</html>
